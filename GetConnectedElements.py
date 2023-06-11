@@ -1,20 +1,6 @@
 import powerfactory as pf
 app = pf.GetApplication()
 
-# Get active study case
-active_case = app.GetActiveStudyCase()
-
-# Get all buses
-buses = app.GetCalcRelevantObjects('*.ElmTerm')
-
-# Get elements connected to each bus 
-
-import powerfactory as pf
-app = pf.GetApplication()
-
-# Get active study case
-active_case = app.GetActiveStudyCase()
-
 # Get all buses
 buses = app.GetCalcRelevantObjects('*.ElmTerm')
 
