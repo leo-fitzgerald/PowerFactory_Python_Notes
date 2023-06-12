@@ -1,7 +1,7 @@
 # run IEC & Complete Method 3-phase short circuit at all buses using IEEE 9 Bus model 
 # return fault current and short circuit r1, x1 values for each bus
 
-def bus_results():
+def bus_results(sc_type):
     buses = app.GetCalcRelevantObjects('*.ElmTerm')
     for bus in buses:
         # round values for readability
