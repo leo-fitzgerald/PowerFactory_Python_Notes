@@ -6,7 +6,7 @@ def bus_results():
     for bus in buses:
         # round values for readability
         name, vnom, ikss, r, x = bus.GetAttribute('loc_name'), round(bus.GetAttribute('uknom'),3), round(bus.GetAttribute('m:Ikss'),3), round(bus.GetAttribute('m:rSbase'),3), round(bus.GetAttribute('m:xSbase'),3)       
-        app.PrintPlain("{} | {} kV | Type:{} | {} kA | r1:{} pu | x1:{} pu ".format(name, vnom, sc_type, ikss, r, x))
+        app.PrintPlain("{} | {} kV | Type:{} | {} kA | r1: {} pu | x1: {} pu ".format(name, vnom, sc_type, ikss, r, x))
 
 def shortcircuit(sc_type):
     sc = app.GetFromStudyCase('ComShc')
