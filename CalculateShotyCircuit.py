@@ -18,8 +18,7 @@ def shortcircuit(sc_type):
         
         # execute short circuit, get list of all buses
         sc.Execute()
-        # app.PrintPlain(" ---------------- IEC 60909 ----------------")
-        bus_results
+        bus_results(sc_type)
 
     elif sc_type == "Complete":
         sc.iopt_mde = 3        # complete
@@ -29,7 +28,7 @@ def shortcircuit(sc_type):
 
         # execute short circuit, get list of all buses
         sc.Execute()
-        bus_results()
+        bus_results(sc_type)
 
         
 import powerfactory as pf
