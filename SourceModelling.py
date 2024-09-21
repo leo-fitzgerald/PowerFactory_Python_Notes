@@ -1,0 +1,46 @@
+# LF 
+# Calculate Source Impedance from short circuit current 
+
+import math
+
+# ---------------------INPUT -------------------
+Vline = 11      #  Three-phase line-line voltage
+Isc3P = 21      #  Three-phase short circuit curent amp
+Isc1P = 1.5     #  Single-phase short circuit curent amp
+XR3P = 18       # Three-phase fault current XR ratio
+XR1P = 40       # Single-phase fault current XR ratio
+
+# ----------------------------------------------------------------
+Sbase = 100 
+Zbase = (Vline * Vline) / Sbase
+Vphase = Vline/math.sqrt(3)
+Ssc3P = Vline * Isc3P * math.sqrt(3)
+Ssc1P = Vphase * Isc1P
+
+Z1ohm = Vline / (Isc3P * math.sqrt(3))
+Z1pu = Z1ohm / Zbase
+R1ohm = Z1ohm * math.cos(math.atan(XR3P))
+R1pu = R1ohm / Zbase
+X1ohm = Z1ohm * math.sin(math.atan(XR3P))
+X1pu = X1ohm / Zbase
+Z0ohm = ((3*Vphase) / (Isc1P)) - 2*Z1ohm
+Z0pu = Z0ohm / Zbase
+
+# ---------------------OUTPUT-------------------
+print("---"*10)
+print("Ikss 3P: {} kA".format(Isc3P))
+print("Skss 3P: {0:.3g} MVA".format(Ssc3P))
+print("Ikss 1P: {} kA".format(Isc1P))
+print("Skss 1P: {0:.3g} MVA".format(Isc1P))
+print("---"*10)
+print("Z1: {0:.3g} ohm".format(Z1ohm))
+print("R1: {0:.3g} ohm".format(R1ohm))
+print("X1: {0:.3g} ohm".format(X1ohm))
+print("---"*10)
+print("Z1: {0:.3g} pu".format(Z1pu))
+print("R1: {0:.3g} pu".format(R1pu))
+print("X1: {0:.3g} pu".format(X1pu))
+print("---"*10)
+print("Z0: {0:.3g} ohm".format(Z0ohm))
+print("Z0: {0:.3g} pu".format(Z0pu))
+print("---"*10)
