@@ -2,6 +2,10 @@
 
 # Convert PowerFactory Grid Short Circuit to PSCAD Input Format
 
+# Tkinter GUI equivalent of SourceModelling.py in same res folder 
+
+# To do: include PPS/NPS/ZPS Ratios from PowerFactory
+
 
 from tkinter import *
 from tkinter.ttk import Progressbar
