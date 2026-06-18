@@ -8,7 +8,9 @@ buses = app.GetCalcRelevantObjects('*.ElmTerm')
 
 # get min distance from all buses to bus 9
 for bus in buses:
-    app.PrintPlain("Next upstream HV Bus for {} is {}".format(bus, bus.GetNextHVBus()))
+    next_hv = bus.GetNextHVBus()
+    next_hv_name = next_hv.loc_name if next_hv else None
+    app.PrintPlain(f"Next upstream HV Bus for {bus.loc_name} is {next_hv_name}")
 
 
 # ------------- Results -------------

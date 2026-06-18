@@ -1,41 +1,36 @@
-# run IEC & Complete Method 3-phase short circuit at all buses using IEEE 9 Bus model 
+# run IEC & Complete Method 3-phase short circuit at all buses using IEEE 9 Bus model
 # return fault current and short circuit r1, x1 values for each bus
+
+import powerfactory as pf
+
+app = pf.GetApplication()
 
 def bus_results(sc_type):
     buses = app.GetCalcRelevantObjects('*.ElmTerm')
     for bus in buses:
-        # round values for readability
-        name, vnom, ikss, r, x = bus.GetAttribute('loc_name'), round(bus.GetAttribute('uknom'),3), round(bus.GetAttribute('m:Ikss'),3), round(bus.GetAttribute('m:rSbase'),3), round(bus.GetAttribute('m:xSbase'),3)       
-        app.PrintPlain("{} | {} kV | Type:{} | {} kA | r1: {} pu | x1: {} pu ".format(name, vnom, sc_type, ikss, r, x))
+        name = bus.GetAttribute('loc_name')
+        vnom = round(bus.GetAttribute('uknom'), 3)
+        ikss = round(bus.GetAttribute('m:Ikss'), 3)
+        r    = round(bus.GetAttribute('m:rSbase'), 3)
+        x    = round(bus.GetAttribute('m:xSbase'), 3)
+        app.PrintPlain(f"{name} | {vnom} kV | Type:{sc_type} | {ikss} kA | r1: {r} pu | x1: {x} pu")
 
 def shortcircuit(sc_type):
     sc = app.GetFromStudyCase('ComShc')
+    sc.iopt_sch    = "3psc"  # 3 phase short circuit
+    sc.iopt_curr   = 0       # maximum fault level
+    sc.iopt_allbus = 2       # all buses
+
     if sc_type == "IEC":
-        sc.iopt_mde = 1        # IEC
-        sc.iopt_sch = "3psc"   # 3 phase short circuit
-        sc.iopt_curr = 0       # maximum fault level
-        sc.iopt_allbus = 2     # all buses
-        
-        # execute short circuit, get list of all buses
-        sc.Execute()
-        bus_results(sc_type)
-
+        sc.iopt_mde = 1      # IEC
     elif sc_type == "Complete":
-        sc.iopt_mde = 3        # complete
-        sc.iopt_sch = "3psc"   # 3 phase short circuit
-        sc.iopt_curr = 0       # maximum fault level 
-        sc.iopt_allbus = 2     # all buses
+        sc.iopt_mde = 3      # complete
 
-        # execute short circuit, get list of all buses
-        sc.Execute()
-        bus_results(sc_type)
+    sc.Execute()
+    bus_results(sc_type)
 
-        
-import powerfactory as pf
-
-app = pf.GetApplication()
 shortcircuit("IEC")
-app.PrintPlain("\n")
+app.PrintPlain("")
 shortcircuit("Complete")
 
 

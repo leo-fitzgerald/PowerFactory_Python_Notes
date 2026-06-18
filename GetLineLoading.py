@@ -15,7 +15,8 @@ lines = app.GetCalcRelevantObjects('*.ElmLne')
 
 # print all line loading
 for line in lines:
-    app.PrintPlain("{} | {} % ".format(line.loc_name, line.GetAttribute('c:loading')))
+    loading = round(line.GetAttribute('c:loading'), 3)
+    app.PrintPlain(f"{line.loc_name} | {loading} %")
 
 
 # ------------- Results ------------- #

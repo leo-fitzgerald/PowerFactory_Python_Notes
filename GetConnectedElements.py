@@ -7,7 +7,7 @@ buses = app.GetCalcRelevantObjects('*.ElmTerm')
 # get connected elements
 for bus in buses:
     connected_elements = bus.GetConnectedElements()
-    app.PrintPlain("{} | {}".format(bus, connected_elements))
+    app.PrintPlain(f"{bus} | {connected_elements}")
     # returns: <class 'powerfactory.DataObject'>
 
 app.PrintPlain("\n")
@@ -16,7 +16,7 @@ app.PrintPlain("\n")
 for bus in buses:
     connected_elements = bus.GetConnectedElements()
     for element in connected_elements:
-        app.PrintPlain("{} | {}".format(bus.loc_name, element.loc_name))
+        app.PrintPlain(f"{bus.loc_name} | {element.loc_name}")
     app.PrintPlain("\n")
 
 # ------------- Results ------------- #

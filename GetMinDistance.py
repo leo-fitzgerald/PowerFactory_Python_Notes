@@ -12,7 +12,8 @@ bus_9 = app.GetCalcRelevantObjects('Bus 9.ElmTerm')
 
 # get min distance from all buses to bus 9
 for bus in buses:
-    app.PrintPlain("Min distance {} to {} | {} km".format(bus, bus_9[0], bus.GetMinDistance(bus_9[0])))
+    dist = bus.GetMinDistance(bus_9[0])
+    app.PrintPlain(f"Min distance {bus.loc_name} to {bus_9[0].loc_name} | {dist} km")
 
 # ------------- Results ------------- #
 # Min distance    Bus 1 to    Bus 9 | 2.0 km
